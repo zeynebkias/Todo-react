@@ -14,7 +14,7 @@
 
   }
   .todo-input input{
-      width: 75vh;
+      width: 80vh;
       background-color: #2424249a;
       height: 50px;
       font-size: 1rem;
@@ -33,14 +33,15 @@
 
   .todos ul{
     margin-top: 20px;
-   
+
 
 
   }
   .todos ul li{
-    width: 75vh;
+    text-align: left;
+    width: 80vh;
     background-color: hsl(235, 24%, 19%);
-    height: 50px;
+    height: 55px;
     font-size: 1rem;
     color: hsl(233, 11%, 84%);
     padding: 15px;
@@ -72,5 +73,40 @@
     text-decoration: line-through;
     color:hsl(234, 11%, 52%);
   }
-  
-  
+
+
+.todos .remove{
+  background: url('../imgs/icon-cross.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+
+
+
+  .footer{
+    display: flex;
+    width: 80vh;
+    justify-content: space-between;
+    background-color: hsl(235, 24%, 19%);
+    height: 55px;
+    font-size: 1rem;
+    color: hsl(233, 11%, 84%);
+    padding: 15px;
+  }
+  .footer input{
+    text-align: center;
+    width: 10vh;
+    background: none;
+    color : white;
+    border: 1px solid hsl(234, 11%, 52%);
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    padding : 2px;
+
+  }
+ 

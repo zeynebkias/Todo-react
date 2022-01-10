@@ -8,23 +8,57 @@ import moon from '../src/imgs/icon-moon.svg'
 
 
 function App() {
-  const [darkTheme, setDarkTheme] = useState(false)
 
-  const [todoList , setTodo] = useState([])
-  const [inputValue, setInputValue] = useState("");
+  const [darkTheme, setDarkTheme] = useState(false) // to change the mood
+  const [todoList , setTodo] = useState([]) // show the TODO list
+  const [inputValue, setInputValue] = useState("") // to get the input value
+  const [CompletedTask, setCompletedTask] = useState(0) 
 
+
+
+// get the DATA by using useEffect hook
     useEffect(() => {
         axios.get('https://jsonplaceholder.typicode.com/todos') 
         .then (res => {
-              setTodo(res.data.slice(0,7))
-        
-        })
-        },[])
+              setTodo(res.data.slice(2,10))
+
+//condition
+
+for (let i = 0; i < res.data.slice(2, 10).length; i++) {
+  if (res.data[i].completed) {
+    setCompletedTask((CompletedTask) => CompletedTask + 1) 
+  }}  
 
 
+  })
+  },[])
+
+
+
+// count the tasks
+  const alreadyChecked = (e) => {
+    if (e.currentTarget.checked) { // taks already checked
+      setCompletedTask((CompletedTask) => CompletedTask+ 1) 
+    }
+    else {
+      setCompletedTask((CompletedTask) => CompletedTask - 1)
+    }
+  }
+
+  // remve items
+  const remove = (e) => {
+    
+   };
+
+
+
+// get the input Value
     const getTodoValue = (e) => {
           setInputValue(e.target.value)
         }
+
+
+// print the input Value
 
     const printTodoValue = (e) => {
           e.preventDefault()
@@ -44,7 +78,12 @@ function App() {
     
     <button onClick={() => setDarkTheme(prevTheme => !prevTheme)}><img/> </button>
   </div>
-    <Todo printTodoValue={printTodoValue} getTodoValue={getTodoValue} inputValue={inputValue} todo={todoList} />
+    <Todo printTodoValue={printTodoValue} getTodoValue={getTodoValue} inputValue={inputValue} todo={todoList}
+    alreadyChecked={alreadyChecked} remove={remove} AllTasks={todoList.length} CompletedTask={CompletedTask} /> 
+
+
+
+    
    </div>
 
 
