@@ -2,14 +2,19 @@ import './App.css'
 import Todo from './components/Todo'
 import { useState , useEffect } from 'react'
 import axios from 'axios'
+import Footer from './components/Footer'
+import DarkComponent from './components/DarkComponent'
+import Form from './components/Form'
 import sun from '../src/imgs/icon-sun.svg'
 import moon from '../src/imgs/icon-moon.svg'
 
 
 
+
+
 function App() {
 
-  const [darkTheme, setDarkTheme] = useState(false) // to change the mood
+  // const [darkTheme, setDarkTheme] = useState(false) // to change the mood
   const [todoList , setTodo] = useState([]) // show the TODO list
   const [inputValue, setInputValue] = useState("") // to get the input value
   const [CompletedTask, setCompletedTask] = useState(0) 
@@ -38,7 +43,7 @@ for (let i = 0; i < res.data.slice(2, 10).length; i++) {
 // count the tasks
   const alreadyChecked = (e) => {
     if (e.currentTarget.checked) { // taks already checked
-      setCompletedTask((CompletedTask) => CompletedTask+ 1) 
+      setCompletedTask((CompletedTask) => CompletedTask +1) 
     }
     else {
       setCompletedTask((CompletedTask) => CompletedTask - 1)
@@ -46,9 +51,9 @@ for (let i = 0; i < res.data.slice(2, 10).length; i++) {
   }
 
   // remve items
-  const remove = (e) => {
+  // const remove = (e) => {
     
-   };
+  //  };
 
 
 
@@ -63,37 +68,40 @@ for (let i = 0; i < res.data.slice(2, 10).length; i++) {
     const printTodoValue = (e) => {
           e.preventDefault()
           let id = todoList.length+1
-          todoList.push({ id: id, title: inputValue})
+          // todoList.push({ id: id, title: inputValue})
+          setTodo([ ...todoList, { id: id, title: inputValue}])
+
           setInputValue("") // clean the inputValue 
         }
 
 
 
   return (
-<div className={darkTheme ? 'dark-theme' : 'light-theme'}>
-      <nav></nav> 
+    <div>
+{/* <div className={darkTheme ? 'dark-theme' : 'light-theme'}>
+      <nav></nav>  */}
+      <DarkComponent/>
+
+
+    <Form printTodoValue={printTodoValue} getTodoValue={getTodoValue} inputValue={inputValue}/>
+
+
   <div className="container">
-  <div className="header">
-    <h1>Todo</h1>
+  
+    <Todo  todo={todoList} alreadyChecked={alreadyChecked} /> 
     
-    <button onClick={() => setDarkTheme(prevTheme => !prevTheme)}><img/> </button>
-  </div>
-    <Todo printTodoValue={printTodoValue} getTodoValue={getTodoValue} inputValue={inputValue} todo={todoList}
-    alreadyChecked={alreadyChecked} remove={remove} AllTasks={todoList.length} CompletedTask={CompletedTask} /> 
+   <Footer  AllTasks={todoList.length} CompletedTask={CompletedTask}/>
 
-
-
-    
    </div>
 
-
+   
 
 </div>
        
   )
 }
 
-export default App
+export default App;
 
 
 
